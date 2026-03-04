@@ -1,0 +1,26 @@
+name: Download Code as Zip
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  zip-and-upload:
+    name: Zip and upload code
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Zip repository
+        run: zip -r code.zip . -x '*.git*'
+
+      - name: Upload zip artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: code
+          path: code.zip
