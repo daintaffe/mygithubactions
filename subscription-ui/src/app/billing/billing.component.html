@@ -1,0 +1,57 @@
+<div class="billing-layout">
+  <!-- Top toolbar -->
+  <mat-toolbar class="billing-toolbar">
+    <mat-icon class="toolbar-logo">code</mat-icon>
+    <span class="toolbar-title">GitHub Copilot</span>
+    <span class="spacer"></span>
+    <span class="org-name">
+      <mat-icon class="org-icon">corporate_fare</mat-icon>
+      {{ orgName }}
+    </span>
+  </mat-toolbar>
+
+  <div class="billing-content">
+    <!-- Left sidebar -->
+    <aside class="billing-sidebar">
+      <div class="plan-summary-card">
+        <div class="plan-badge">
+          <mat-icon class="plan-icon">auto_awesome</mat-icon>
+          <span class="plan-label">{{ planName }}</span>
+        </div>
+        <mat-divider class="divider"></mat-divider>
+        <div class="plan-stat">
+          <span class="stat-label">Active seats</span>
+          <span class="stat-value">{{ activeSeats }}</span>
+        </div>
+        <div class="plan-stat">
+          <span class="stat-label">Monthly spend</span>
+          <span class="stat-value">\${{ monthlySpend | number:'1.2-2' }}</span>
+        </div>
+        <mat-divider class="divider"></mat-divider>
+        <button mat-stroked-button class="manage-btn" color="primary">
+          Manage subscription
+        </button>
+      </div>
+
+      <mat-nav-list class="nav-list">
+        <h3 class="nav-section-header">Billing &amp; licensing</h3>
+        @for (item of navItems; track item.route) {
+          <a
+            mat-list-item
+            [routerLink]="item.route"
+            routerLinkActive="active-nav-item"
+            class="nav-item"
+          >
+            <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+            <span matListItemTitle>{{ item.label }}</span>
+          </a>
+        }
+      </mat-nav-list>
+    </aside>
+
+    <!-- Main content -->
+    <main class="billing-main">
+      <router-outlet />
+    </main>
+  </div>
+</div>

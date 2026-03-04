@@ -1,0 +1,103 @@
+<div class="section-container">
+  <div class="section-header">
+    <h2 class="section-title">Payment history</h2>
+    <p class="section-description">
+      Download receipts and view all past payments for your subscription.
+    </p>
+  </div>
+
+  <!-- Summary row -->
+  <div class="summary-row">
+    <div class="summary-stat">
+      <span class="stat-label">Total invoices</span>
+      <span class="stat-value">{{ invoices.length }}</span>
+    </div>
+    <div class="summary-stat">
+      <span class="stat-label">Total paid</span>
+      <span class="stat-value success">\${{ totalPaid() | number:'1.2-2' }}</span>
+    </div>
+    <div class="stat-spacer"></div>
+
+    <!-- Filter -->
+    <mat-form-field appearance="outline" class="filter-field">
+      <mat-label>Filter by status</mat-label>
+      <mat-select [(ngModel)]="filterStatus">
+        <mat-option value="all">All</mat-option>
+        <mat-option value="paid">Paid</mat-option>
+        <mat-option value="pending">Pending</mat-option>
+        <mat-option value="failed">Failed</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Invoices table -->
+  <div class="table-container">
+    <table mat-table [dataSource]="filteredInvoices" class="invoice-table">
+
+      <!-- Date column -->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let inv">
+          {{ inv.date | date:'MMM d, yyyy' }}
+        </td>
+      </ng-container>
+
+      <!-- Description column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let inv">
+          <div class="invoice-desc">
+            <span class="inv-id">{{ inv.id }}</span>
+            <span class="inv-text">{{ inv.description }}</span>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Amount column -->
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef>Amount</th>
+        <td mat-cell *matCellDef="let inv">
+          \${{ inv.amount | number:'1.2-2' }}
+        </td>
+      </ng-container>
+
+      <!-- Status column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let inv">
+          <span class="status-chip" [ngClass]="'status-' + inv.status">
+            <mat-icon class="status-icon">
+              {{ inv.status === 'paid' ? 'check_circle' : inv.status === 'pending' ? 'schedule' : 'error' }}
+            </mat-icon>
+            {{ inv.status | titlecase }}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Actions column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let inv">
+          <button
+            mat-icon-button
+            [matTooltip]="'Download invoice ' + inv.id"
+            class="download-btn"
+            [attr.aria-label]="'Download invoice ' + inv.id"
+          >
+            <mat-icon>download</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="invoice-row"></tr>
+    </table>
+
+    @if (filteredInvoices.length === 0) {
+      <div class="empty-state">
+        <mat-icon>receipt_long</mat-icon>
+        <p>No invoices match the selected filter.</p>
+      </div>
+    }
+  </div>
+</div>
