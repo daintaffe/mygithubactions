@@ -1,0 +1,193 @@
+.section-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.section-header {
+  .section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #f0f6fc;
+    margin: 0 0 6px;
+  }
+
+  .section-description {
+    font-size: 14px;
+    color: #8b949e;
+    margin: 0;
+  }
+}
+
+.summary-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+
+  .summary-stat {
+    display: flex;
+    flex-direction: column;
+
+    .stat-label {
+      font-size: 12px;
+      color: #8b949e;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .stat-value {
+      font-size: 20px;
+      font-weight: 600;
+      color: #f0f6fc;
+
+      &.success {
+        color: #3fb950;
+      }
+    }
+  }
+
+  .stat-spacer {
+    flex: 1;
+  }
+
+  .filter-field {
+    width: 180px;
+
+    ::ng-deep .mat-mdc-text-field-wrapper {
+      background-color: #161b22;
+    }
+  }
+}
+
+.table-container {
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.invoice-table {
+  width: 100%;
+  background-color: transparent;
+
+  th.mat-mdc-header-cell {
+    background-color: #161b22;
+    color: #8b949e;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #30363d;
+    padding: 12px 16px;
+  }
+
+  td.mat-mdc-cell {
+    color: #c9d1d9;
+    font-size: 14px;
+    border-bottom: 1px solid #21262d;
+    padding: 12px 16px;
+    vertical-align: middle;
+  }
+
+  .invoice-row:last-child td {
+    border-bottom: none;
+  }
+
+  .invoice-row:hover td {
+    background-color: rgba(177, 186, 196, 0.04);
+  }
+
+  .invoice-desc {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    .inv-id {
+      font-size: 11px;
+      color: #8b949e;
+      font-family: monospace;
+    }
+
+    .inv-text {
+      font-size: 13px;
+      color: #e6edf3;
+    }
+  }
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+
+  .status-icon {
+    font-size: 14px;
+    height: 14px;
+    width: 14px;
+  }
+
+  &.status-paid {
+    background-color: rgba(63, 185, 80, 0.15);
+    color: #3fb950;
+  }
+
+  &.status-pending {
+    background-color: rgba(210, 153, 34, 0.15);
+    color: #d29922;
+  }
+
+  &.status-failed {
+    background-color: rgba(248, 81, 73, 0.15);
+    color: #f85149;
+  }
+}
+
+.download-btn {
+  color: #58a6ff;
+
+  &:hover {
+    background-color: rgba(88, 166, 255, 0.1);
+  }
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  color: #8b949e;
+
+  mat-icon {
+    font-size: 40px;
+    height: 40px;
+    width: 40px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    font-size: 14px;
+    margin: 0;
+  }
+}
+
+::ng-deep .mat-mdc-form-field {
+  .mat-mdc-floating-label {
+    color: #8b949e !important;
+  }
+
+  .mdc-text-field--outlined .mdc-notched-outline__leading,
+  .mdc-text-field--outlined .mdc-notched-outline__notch,
+  .mdc-text-field--outlined .mdc-notched-outline__trailing {
+    border-color: #30363d !important;
+  }
+
+  .mat-mdc-select-value {
+    color: #e6edf3 !important;
+  }
+}

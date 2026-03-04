@@ -1,0 +1,195 @@
+<div class="section-container">
+  <div class="section-header">
+    <h2 class="section-title">Additional billing details</h2>
+    <p class="section-description">
+      Configure billing email, tax information, and budget alerts for your organization.
+    </p>
+  </div>
+
+  <!-- Billing email -->
+  <div class="info-card">
+    <div class="card-header">
+      <div class="card-title-row">
+        <mat-icon class="card-icon">email</mat-icon>
+        <h3 class="card-title">Billing email</h3>
+      </div>
+      @if (!editingEmail) {
+        <button mat-stroked-button class="edit-btn" (click)="editingEmail = true">
+          <mat-icon>edit</mat-icon> Edit
+        </button>
+      }
+    </div>
+
+    @if (!editingEmail) {
+      <div class="field-display">
+        <span class="field-value">{{ billingEmail }}</span>
+        <span class="field-hint">Invoices and billing notifications are sent to this address.</span>
+      </div>
+    } @else {
+      <div class="inline-edit">
+        <mat-form-field appearance="outline" class="form-field full-width">
+          <mat-label>Billing email address</mat-label>
+          <input
+            matInput
+            type="email"
+            [(ngModel)]="emailEditValue"
+            placeholder="billing@your-org.com"
+            />
+          <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
+        <div class="form-actions">
+          <button mat-flat-button color="primary" (click)="saveEmail()" [disabled]="!emailEditValue.trim()">
+            Save email
+          </button>
+          <button mat-stroked-button (click)="cancelEmail()">Cancel</button>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Tax information -->
+  <div class="info-card">
+    <div class="card-header">
+      <div class="card-title-row">
+        <mat-icon class="card-icon">receipt</mat-icon>
+        <h3 class="card-title">Tax information</h3>
+      </div>
+      @if (!editingTax) {
+        <button mat-stroked-button class="edit-btn" (click)="editingTax = true">
+          <mat-icon>edit</mat-icon> Edit
+        </button>
+      }
+    </div>
+
+    @if (!editingTax) {
+      <div class="tax-display">
+        <div class="detail-row">
+          <span class="detail-label">Business name</span>
+          <span class="detail-value">{{ taxInfo.businessName }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Tax ID</span>
+          <span class="detail-value mono">{{ taxInfo.taxId }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Tax exempt</span>
+          <span class="detail-value">
+            <span class="status-badge" [ngClass]="taxInfo.taxExempt ? 'badge-yes' : 'badge-no'">
+              {{ taxInfo.taxExempt ? 'Yes' : 'No' }}
+            </span>
+          </span>
+        </div>
+      </div>
+    } @else {
+      <form [formGroup]="taxForm" (ngSubmit)="saveTax()" class="card-form">
+        <mat-form-field appearance="outline" class="form-field full-width">
+          <mat-label>Business name</mat-label>
+          <input matInput formControlName="businessName" />
+          @if (taxForm.get('businessName')?.hasError('required')) {
+            <mat-error>Required</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field full-width">
+          <mat-label>Tax ID / VAT Number</mat-label>
+          <input matInput formControlName="taxId" placeholder="e.g. US-12-3456789" />
+          @if (taxForm.get('taxId')?.hasError('required')) {
+            <mat-error>Required</mat-error>
+          }
+        </mat-form-field>
+
+        <div class="toggle-row">
+          <mat-slide-toggle formControlName="taxExempt" color="primary">
+            Tax exempt organization
+          </mat-slide-toggle>
+          <span class="toggle-hint">Upload a tax exemption certificate after saving.</span>
+        </div>
+
+        <div class="form-actions">
+          <button mat-flat-button color="primary" type="submit" [disabled]="taxForm.invalid">
+            Save tax info
+          </button>
+          <button mat-stroked-button type="button" (click)="cancelTax()">Cancel</button>
+        </div>
+      </form>
+    }
+  </div>
+
+  <!-- Budget alerts -->
+  <div class="info-card">
+    <div class="card-header">
+      <div class="card-title-row">
+        <mat-icon class="card-icon">notifications_active</mat-icon>
+        <h3 class="card-title">Budget alerts</h3>
+      </div>
+      @if (!editingBudget) {
+        <button mat-stroked-button class="edit-btn" (click)="editingBudget = true">
+          <mat-icon>edit</mat-icon> Edit
+        </button>
+      }
+    </div>
+
+    @if (!editingBudget) {
+      <div class="tax-display">
+        <div class="detail-row">
+          <span class="detail-label">Alerts enabled</span>
+          <span class="detail-value">
+            <span class="status-badge" [ngClass]="budgetAlert.enabled ? 'badge-yes' : 'badge-no'">
+              {{ budgetAlert.enabled ? 'On' : 'Off' }}
+            </span>
+          </span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Alert threshold</span>
+          <span class="detail-value">\${{ budgetAlert.threshold | number:'1.0-0' }} / month</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Notify via email</span>
+          <span class="detail-value">{{ budgetAlert.notifyEmail ? 'Yes' : 'No' }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Notify via Slack</span>
+          <span class="detail-value">{{ budgetAlert.notifySlack ? 'Yes' : 'No' }}</span>
+        </div>
+      </div>
+    } @else {
+      <form [formGroup]="budgetForm" (ngSubmit)="saveBudget()" class="card-form">
+        <div class="toggle-row">
+          <mat-slide-toggle formControlName="enabled" color="primary">
+            Enable budget alerts
+          </mat-slide-toggle>
+        </div>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Monthly threshold ($)</mat-label>
+          <input matInput type="number" formControlName="threshold" min="1" />
+          <mat-icon matPrefix>attach_money</mat-icon>
+          @if (budgetForm.get('threshold')?.hasError('min')) {
+            <mat-error>
+              Must be at least $1
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <div class="toggle-row">
+          <mat-slide-toggle formControlName="notifyEmail" color="primary">
+            Send email notification
+          </mat-slide-toggle>
+        </div>
+
+        <div class="toggle-row">
+          <mat-slide-toggle formControlName="notifySlack" color="primary">
+            Send Slack notification
+          </mat-slide-toggle>
+        </div>
+
+        <div class="form-actions">
+          <button mat-flat-button color="primary" type="submit" [disabled]="budgetForm.invalid">
+            Save alerts
+          </button>
+          <button mat-stroked-button type="button" (click)="cancelBudget()">Cancel</button>
+        </div>
+      </form>
+    }
+  </div>
+</div>
