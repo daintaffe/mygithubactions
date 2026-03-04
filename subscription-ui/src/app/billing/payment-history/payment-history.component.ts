@@ -20,22 +20,21 @@ export interface Invoice {
 }
 
 @Component({
-  selector: 'app-payment-history',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatTableModule,
-    MatButtonModule,
-    MatIconModule,
-    MatChipsModule,
-    MatTooltipModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatSelectModule,
-  ],
-  templateUrl: './payment-history.component.html',
-  styleUrl: './payment-history.component.scss',
+    selector: 'app-payment-history',
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatTableModule,
+        MatButtonModule,
+        MatIconModule,
+        MatChipsModule,
+        MatTooltipModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatSelectModule,
+    ],
+    templateUrl: './payment-history.component.html',
+    styleUrl: './payment-history.component.scss'
 })
 export class PaymentHistoryComponent {
   displayedColumns = ['date', 'description', 'amount', 'status', 'actions'];

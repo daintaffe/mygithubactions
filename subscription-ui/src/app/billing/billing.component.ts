@@ -11,24 +11,23 @@ import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-billing',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    RouterLink,
-    RouterLinkActive,
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatBadgeModule,
-    MatDividerModule,
-    MatChipsModule,
-  ],
-  templateUrl: './billing.component.html',
-  styleUrl: './billing.component.scss',
+    selector: 'app-billing',
+    imports: [
+        CommonModule,
+        RouterOutlet,
+        RouterLink,
+        RouterLinkActive,
+        MatSidenavModule,
+        MatListModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatBadgeModule,
+        MatDividerModule,
+        MatChipsModule,
+    ],
+    templateUrl: './billing.component.html',
+    styleUrl: './billing.component.scss'
 })
 export class BillingComponent {
   planName = 'GitHub Copilot Business';

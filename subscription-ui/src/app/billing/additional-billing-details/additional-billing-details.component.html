@@ -34,7 +34,7 @@
             type="email"
             [(ngModel)]="emailEditValue"
             placeholder="billing@your-org.com"
-          />
+            />
           <mat-icon matSuffix>email</mat-icon>
         </mat-form-field>
         <div class="form-actions">
@@ -85,13 +85,17 @@
         <mat-form-field appearance="outline" class="form-field full-width">
           <mat-label>Business name</mat-label>
           <input matInput formControlName="businessName" />
-          <mat-error *ngIf="taxForm.get('businessName')?.hasError('required')">Required</mat-error>
+          @if (taxForm.get('businessName')?.hasError('required')) {
+            <mat-error>Required</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="form-field full-width">
           <mat-label>Tax ID / VAT Number</mat-label>
           <input matInput formControlName="taxId" placeholder="e.g. US-12-3456789" />
-          <mat-error *ngIf="taxForm.get('taxId')?.hasError('required')">Required</mat-error>
+          @if (taxForm.get('taxId')?.hasError('required')) {
+            <mat-error>Required</mat-error>
+          }
         </mat-form-field>
 
         <div class="toggle-row">
@@ -160,9 +164,11 @@
           <mat-label>Monthly threshold ($)</mat-label>
           <input matInput type="number" formControlName="threshold" min="1" />
           <mat-icon matPrefix>attach_money</mat-icon>
-          <mat-error *ngIf="budgetForm.get('threshold')?.hasError('min')">
-            Must be at least $1
-          </mat-error>
+          @if (budgetForm.get('threshold')?.hasError('min')) {
+            <mat-error>
+              Must be at least $1
+            </mat-error>
+          }
         </mat-form-field>
 
         <div class="toggle-row">

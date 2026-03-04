@@ -13,24 +13,23 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-additional-billing-details',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
-    MatSelectModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-  ],
-  templateUrl: './additional-billing-details.component.html',
-  styleUrl: './additional-billing-details.component.scss',
+    selector: 'app-additional-billing-details',
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDividerModule,
+        MatSelectModule,
+        MatSlideToggleModule,
+        MatSnackBarModule,
+    ],
+    templateUrl: './additional-billing-details.component.html',
+    styleUrl: './additional-billing-details.component.scss'
 })
 export class AdditionalBillingDetailsComponent {
   editingEmail = false;

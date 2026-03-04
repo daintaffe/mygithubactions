@@ -11,22 +11,21 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
-  selector: 'app-payment-information',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
-    MatSelectModule,
-    MatChipsModule,
-  ],
-  templateUrl: './payment-information.component.html',
-  styleUrl: './payment-information.component.scss',
+    selector: 'app-payment-information',
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDividerModule,
+        MatSelectModule,
+        MatChipsModule,
+    ],
+    templateUrl: './payment-information.component.html',
+    styleUrl: './payment-information.component.scss'
 })
 export class PaymentInformationComponent {
   cardForm: FormGroup;

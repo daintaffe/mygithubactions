@@ -39,35 +39,43 @@
         <mat-form-field appearance="outline" class="form-field full-width">
           <mat-label>Cardholder name</mat-label>
           <input matInput formControlName="cardholderName" placeholder="John Doe" />
-          <mat-error *ngIf="cardForm.get('cardholderName')?.hasError('required')">
-            Cardholder name is required
-          </mat-error>
+          @if (cardForm.get('cardholderName')?.hasError('required')) {
+            <mat-error>
+              Cardholder name is required
+            </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="form-field full-width">
           <mat-label>Card number</mat-label>
           <input matInput formControlName="cardNumber" placeholder="1234 5678 9012 3456" maxlength="16" />
           <mat-icon matSuffix>credit_card</mat-icon>
-          <mat-error *ngIf="cardForm.get('cardNumber')?.hasError('pattern')">
-            Enter a valid 16-digit card number
-          </mat-error>
+          @if (cardForm.get('cardNumber')?.hasError('pattern')) {
+            <mat-error>
+              Enter a valid 16-digit card number
+            </mat-error>
+          }
         </mat-form-field>
 
         <div class="form-row">
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>Expiry date (MM/YY)</mat-label>
             <input matInput formControlName="expiryDate" placeholder="MM/YY" maxlength="5" />
-            <mat-error *ngIf="cardForm.get('expiryDate')?.hasError('pattern')">
-              Enter a valid expiry (MM/YY)
-            </mat-error>
+            @if (cardForm.get('expiryDate')?.hasError('pattern')) {
+              <mat-error>
+                Enter a valid expiry (MM/YY)
+              </mat-error>
+            }
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>CVV</mat-label>
             <input matInput formControlName="cvv" placeholder="•••" maxlength="4" type="password" />
-            <mat-error *ngIf="cardForm.get('cvv')?.hasError('pattern')">
-              Enter a valid CVV
-            </mat-error>
+            @if (cardForm.get('cvv')?.hasError('pattern')) {
+              <mat-error>
+                Enter a valid CVV
+              </mat-error>
+            }
           </mat-form-field>
         </div>
 
@@ -106,14 +114,18 @@
         <mat-form-field appearance="outline" class="form-field full-width">
           <mat-label>Address line 1</mat-label>
           <input matInput formControlName="line1" />
-          <mat-error *ngIf="addressForm.get('line1')?.hasError('required')">Required</mat-error>
+          @if (addressForm.get('line1')?.hasError('required')) {
+            <mat-error>Required</mat-error>
+          }
         </mat-form-field>
 
         <div class="form-row">
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>City</mat-label>
             <input matInput formControlName="city" />
-            <mat-error *ngIf="addressForm.get('city')?.hasError('required')">Required</mat-error>
+            @if (addressForm.get('city')?.hasError('required')) {
+              <mat-error>Required</mat-error>
+            }
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="form-field">
@@ -124,7 +136,9 @@
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>ZIP / Postal code</mat-label>
             <input matInput formControlName="zip" />
-            <mat-error *ngIf="addressForm.get('zip')?.hasError('required')">Required</mat-error>
+            @if (addressForm.get('zip')?.hasError('required')) {
+              <mat-error>Required</mat-error>
+            }
           </mat-form-field>
         </div>
 
